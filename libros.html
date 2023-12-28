@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador de libros</title>
+    <link rel="stylesheet" href="styles.css">
+    <h1>Escriba aquí el titulo del libro que desea buscar</h1>
+    <form action="">
+        <input type="text" id="libro"> <br>
+        <input id="boton" type="button" value="Enviar" onclick="buscar()">
+        
+    </form>
+    <h2 id="resultado"></h2>
+    <form  id="fechas">
+        <h1>Buscador por años</h1>
+        Desde <input id="inicio" type="text">
+        hasta <input id="fin" type="text">
+        <input id="boton" type="button" value="Enviar" onclick="fechas()">
+    </form>
+    <h2 id="resultadofe"></h2>
+</head>
+
+<body>
+    <script>
+        let lib = {
+            "libros": [
+                {
+                    "titulo": "EL GRAN GATSBY",
+                    "autor": "F. Scott Fitzgerald",
+                    "publicacion": 1925,
+                    "genero": "Novela",
+                    "disponible": true
+                },
+                {
+                    "titulo": "CIEN AÑOS DE SOLEDAD",
+                    "autor": "Gabriel García Márquez",
+                    "publicacion": 1967,
+                    "genero": "Realismo mágico",
+                    "disponible": true
+                },
+                {
+                    "titulo": "1984",
+                    "autor": "George Orwell",
+                    "publicacion": 1949,
+                    "genero": "Distopía",
+                    "disponible": false
+                }
+            ]
+        }
+
+        function buscar(){
+            let nomLibro=document.getElementById('libro').value;
+            let texto = document.getElementById('resultado')
+            if (nomLibro.toUpperCase() == lib.libros[0].titulo){
+               texto.textContent= (nomLibro + ", su autor es " + lib.libros[0].autor + ", se publico en " + lib.libros[0].publicacion + ", su genero es " + lib.libros[0].genero+". ¿Tenemos stock? " + lib.libros[0].disponible);
+            }else if(nomLibro.toUpperCase() == lib.libros[1].titulo){
+                texto.textContent=(nomLibro + ", su autor es " + lib.libros[1].autor + ", se publico en " + lib.libros[1].publicacion + ", su genero es " + lib.libros[1].genero+". ¿Tenemos stock? " + lib.libros[1].disponible);
+            }else if(nomLibro == lib.libros[2].titulo){
+                texto.textContent=(nomLibro + ", su autor es " + lib.libros[2].autor + ", se publico en " + lib.libros[2].publicacion + ", su genero es " + lib.libros[2].genero+". ¿Tenemos stock? " + lib.libros[2].disponible) ;   
+        }else{document.write("No existe")}
+        
+    }
+
+    function fechas(){
+        let ini=document.getElementById('inicio').value;
+        let fi=document.getElementById('fin').value;
+        let textofe = document.getElementById('resultadofe')
+        if(ini <= 1925 && fi >=1967){
+            textofe.textContent = (lib.libros[0].titulo + ", el cual se publicó en " + lib.libros[0].publicacion+". " + lib.libros[1].titulo + ", el cual se publicó en " + lib.libros[1].publicacion+". " + lib.libros[2].titulo + ", el cual se publicó en " + lib.libros[2].publicacion)
+        }else if(ini <= 1949 && fi >=1967){
+            textofe.textContent = (lib.libros[1].titulo + ", el cual se publicó en " + lib.libros[1].publicacion+". "+ lib.libros[2].titulo + ", el cual se publicó en " + lib.libros[2].publicacion)
+        }else if(ini <= 1967 && fi >=1967){
+            textofe.textContent = (lib.libros[2].titulo + ", el cual se publicó en " + lib.libros[2].publicacion)
+        }
+        else{
+            textofe.textContent = ("No tenemos libros en las fechas señaladas")
+        }
+    }
+
+    </script>
+</body>
+
+</html>
